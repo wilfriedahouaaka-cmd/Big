@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Encodage des caractères pour supporter les accents français -->
+    <meta charset="UTF-8">
+    <!-- Adaptation de l'affichage et de l'échelle pour les mobiles, tablettes et PC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Titre de la page web affiché dans l'onglet du navigateur -->
+    <title>Pour ma princesse ❤️</title>
+    <!-- Liaison de la feuille de style externe CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ================= AUDIO & CONTRÔLE ================= -->
+    <!-- Élément audio masqué pour la musique de fond en boucle -->
+    <audio id="musique-fond" preload="auto" loop>
+        <source src="she goes by. _ official music video(MP3_160K).mp3" type="audio/mp3">
+        Votre navigateur ne supporte pas l'audio.
+    </audio>
+
+    <!-- Bouton flottant pour couper ou activer le son à tout moment -->
+    <button id="btnAudioControle" class="btn-audio-controle">🔊 Couper le son</button>
+
+
+    <!-- ================= CONTENEUR GLOBAL ================= -->
+    <!-- Conteneur principal qui centre tous les éléments de l'application sur l'écran -->
+    <main class="main-container">
+
+        <!-- ================= PAGE 1 : ACCUEIL ================= -->
+        <section id="page-accueil" class="page active">
+            <!-- Photo de profil principale de la page d'accueil (image 8.jpeg) -->
+            <img src="B.jpeg" alt="Photo de la princesse" class="profile-pic">
+            <div class="boutons-groupe" style="margin-top: 0;">
+                <!-- Bouton d'action pour lancer la musique et avancer vers la transition -->
+                <button id="btnVersPage2" class="btn-action">Clique ici ma princesse ❤️</button>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 2 : TRANSITION ================= -->
+        <section id="page-transition" class="page">
+            <!-- Titre principal de la page de transition -->
+            <h2 class="titre-message">Je sais que ça ne va pas...</h2>
+            <!-- Paragraphe où le texte s'affiche dynamiquement avec l'effet machine à écrire -->
+            <p id="texte-machine-1" class="texte-soutien"></p>
+            <div class="boutons-groupe">
+                <!-- Bouton pour aller vers la galerie -->
+                <button id="btnVersPage3" class="btn-action">Clique ici ✨</button>
+                <!-- Bouton pour revenir à l'accueil -->
+                <button id="btnRetour1" class="btn-secondary">Retour</button>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 3 : GALERIE DE MINI-CARTES (VOD 1 à 8) ================= -->
+        <section id="page-galerie" class="page">
+            <!-- Titre de la galerie -->
+            <h2 class="titre-message">Petites attentions pour toi</h2>
+            
+            <!-- Grille de cartes interactives pour les 8 vidéos avec délais d'animation en cascade -->
+            <div class="videos-grille">
+                <!-- Carte Vidéo 1 -->
+                <div class="video-carte-declencheur" data-video="popup-1" style="animation-delay: 0.05s;">
+                    <div class="miniature-apercu">
+                        <span class="icone-play">▶</span>
+                        <span>Vidéo 1</span>
+                    </div>
+                </div>
+                <!-- Carte Vidéo 2 -->
+                <div class="video-carte-declencheur" data-video="popup-2" style="animation-delay: 0.1s;">
+                    <div class="miniature-apercu">
+                        <span class="icone-play">▶</span>
+                        <span>Vidéo 2</span>
+                    </div>
+                </div>
+                <!-- Carte Vidéo 3 -->
+                <div class="video-carte-declencheur" data-video="popup-3" style="animation-delay: 0.15s;">
+                    <div class="miniature-apercu">
+                        <span class="icone-play">▶</span>
+                        <span>Vidéo 3</span>
+                    </div>
+                </div>
+                <!-- Carte Vidéo 4 -->
+                <div class="video-carte-declencheur" data-video="popup-4" style="animation-delay: 0.2s;">
+                    <div class="miniature-apercu">
+                        <span class="icone-play">▶</span>
+                        <span>Vidéo 4</span>
+                    </div>
+                </div>
+                <!-- Carte Vidéo 5 -->
+                <div class="video-carte-declencheur" data-video="popup-5" style="animation-delay: 0.25s;">
+                    <div class="miniature-apercu">
+                        <span class="icone-play">▶</span>
+                        <span>Vidéo 5</span>
+                    </div>
+                </div>
+                <!-- Carte Vidéo 6 -->
+                <div class="video-carte-declencheur" data-video="popup-6" style="animation-delay: 0.3s;">
+                    <div class="miniature-apercu">
+                        <span class="icone-play">▶</span>
+                        <span>Vidéo 6</span>
+                    </div>
+                </div>
+                <!-- Carte Vidéo 7 -->
+                <div class="video-carte-declencheur" data-video="popup-7" style="animation-delay: 0.35s;">
+                    <div class="miniature-apercu">
+                        <span class="icone-play">▶</span>
+                        <span>Vidéo 7</span>
+                    </div>
+                </div>
+                <!-- Carte Vidéo 8 -->
+                <div class="video-carte-declencheur" data-video="popup-8" style="animation-delay: 0.4s;">
+                    <div class="miniature-apercu">
+                        <span class="icone-play">▶</span>
+                        <span>Vidéo 8</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="boutons-groupe">
+                <!-- Bouton pour accéder au message final -->
+                <button id="btnVersPage4" class="btn-action">Message final 💌</button>
+                <!-- Bouton pour retourner à la page de transition -->
+                <button id="btnRetour2" class="btn-secondary">Retour</button>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 4 : MESSAGE FINAL ================= -->
+        <section id="page-message-final" class="page">
+            <h2 class="titre-message">Un dernier mot pour toi</h2>
+            <div id="conteneur-message-personnalise" style="text-align: left; padding: 0 10px; margin-bottom: 20px;">
+                <!-- Emplacement du long texte final avec effet machine à écrire -->
+                <p id="texte-machine-2" class="texte-soutien" style="font-size: 0.95rem; line-height: 1.5; white-space: pre-line;"></p>
+            </div>
+            <div class="boutons-groupe">
+                <!-- Bouton pour retourner à l'accueil -->
+                <button id="btnRetourAccueil" class="btn-secondary">Retour</button>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ================= FENÊTRES POP-UPS (MODALES) POUR LES 8 VIDÉOS ================= -->
+    
+    <!-- Pop-up Vidéo 1 -->
+    <div id="popup-1" class="modal-overlay">
+        <div class="modal-conteneur">
+            <button class="modal-fermer">&times;</button>
+            <video class="content-video-modal" controls>
+                <source src="1.mp4" type="video/mp4">
+            </video>
+            <p id="texte-modal-1" class="modal-message"></p>
+        </div>
+    </div>
+
+    <!-- Pop-up Vidéo 2 -->
+    <div id="popup-2" class="modal-overlay">
+        <div class="modal-conteneur">
+            <button class="modal-fermer">&times;</button>
+            <video class="content-video-modal" controls>
+                <source src="2.mp4" type="video/mp4">
+            </video>
+            <p id="texte-modal-2" class="modal-message"></p>
+        </div>
+    </div>
+
+    <!-- Pop-up Vidéo 3 -->
+    <div id="popup-3" class="modal-overlay">
+        <div class="modal-conteneur">
+            <button class="modal-fermer">&times;</button>
+            <video class="content-video-modal" controls>
+                <source src="3.mp4" type="video/mp4">
+            </video>
+            <p id="texte-modal-3" class="modal-message"></p>
+        </div>
+    </div>
+
+    <!-- Pop-up Vidéo 4 -->
+    <div id="popup-4" class="modal-overlay">
+        <div class="modal-conteneur">
+            <button class="modal-fermer">&times;</button>
+            <video class="content-video-modal" controls>
+                <source src="4.mp4" type="video/mp4">
+            </video>
+            <p id="texte-modal-4" class="modal-message"></p>
+        </div>
+    </div>
+
+    <!-- Pop-up Vidéo 5 -->
+    <div id="popup-5" class="modal-overlay">
+        <div class="modal-conteneur">
+            <button class="modal-fermer">&times;</button>
+            <video class="content-video-modal" controls>
+                <source src="5.mp4" type="video/mp4">
+            </video>
+            <p id="texte-modal-5" class="modal-message"></p>
+        </div>
+    </div>
+
+    <!-- Pop-up Vidéo 6 -->
+    <div id="popup-6" class="modal-overlay">
+        <div class="modal-conteneur">
+            <button class="modal-fermer">&times;</button>
+            <video class="content-video-modal" controls>
+                <source src="6.mp4" type="video/mp4">
+            </video>
+            <p id="texte-modal-6" class="modal-message"></p>
+        </div>
+    </div>
+
+    <!-- Pop-up Vidéo 7 -->
+    <div id="popup-7" class="modal-overlay">
+        <div class="modal-conteneur">
+            <button class="modal-fermer">&times;</button>
+            <video class="content-video-modal" controls>
+                <source src="7.mp4" type="video/mp4">
+            </video>
+            <p id="texte-modal-7" class="modal-message"></p>
+        </div>
+    </div>
+
+    <!-- Pop-up Vidéo 8 -->
+    <div id="popup-8" class="modal-overlay">
+        <div class="modal-conteneur">
+            <button class="modal-fermer">&times;</button>
+            <video class="content-video-modal" controls>
+                <source src="8.mp4" type="video/mp4">
+            </video>
+            <p id="texte-modal-8" class="modal-message"></p>
+        </div>
+    </div>
+
+
+    <!-- Inclusion du script JavaScript externe -->
+    <script src="script.js"></script>
+</body>
+</html>

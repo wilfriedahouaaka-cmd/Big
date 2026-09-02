@@ -1,0 +1,328 @@
+/* ==========================================
+   1. STYLES DE BASE ET RÉINITIALISATION
+   ========================================== */
+* {
+    box-sizing: border-box; /* Inclut les bordures et le padding dans les dimensions */
+    margin: 0;              /* Supprime les marges par défaut */
+    padding: 0;             /* Supprime les espacements internes par défaut */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police propre et moderne */
+}
+
+/* ==========================================
+   2. FOND D'ÉCRAN GLOBAL (Utilisant l'image A.jpg)
+   ========================================== */
+body {
+    /* Application d'un dégradé assombrissant par-dessus l'image de fond A.jpg pour la lisibilité */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('A.jpg');
+    background-size: cover;          /* L'image couvre tout l'écran sans se déformer */
+    background-position: center;     /* Centre l'image de fond */
+    background-repeat: no-repeat;    /* Empêche la répétition de l'image */
+    background-attachment: fixed;    /* Fixe le fond lors du défilement */
+    min-height: 100vh;               /* Hauteur minimale égale à la hauteur de la fenêtre */
+    display: flex;                   /* Utilisation de Flexbox pour centrer le contenu */
+    justify-content: center;         /* Centrage horizontal */
+    align-items: center;             /* Centrage vertical */
+    padding: 20px;                   /* Marge intérieure globale */
+}
+
+/* ==========================================
+   3. LE CONTENEUR PRINCIPAL
+   ========================================== */
+.main-container {
+    background: transparent;         /* Fond transparent pour fusionner avec le décor */
+    padding: 20px;                    
+    text-align: center;              /* Centre tout le texte à l'intérieur */
+    max-width: 700px;                /* Largeur maximale élargie pour accueillir la grille */
+    width: 100%;                     /* Prend toute la largeur disponible jusqu'au max */
+}
+
+/* ==========================================
+   4. GESTION DES PAGES (AFFICHAGE ET TRANSITIONS)
+   ========================================== */
+.page {
+    display: none !important;        /* Masque par défaut toutes les sections/pages */
+}
+
+.page.active {
+    display: block !important;       /* Affiche uniquement la page possédant la classe 'active' */
+    animation: fadeIn 0.5s ease-out; /* Animation d'apparition douce */
+}
+
+/* Animation d'apparition en fondu vers le bas */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
+   5. PHOTO DE PROFIL PRINCIPALE (Image 8.jpeg)
+   ========================================== */
+.profile-pic {
+    width: 180px;          /* Largeur fixe de la photo de profil */
+    height: 180px;         /* Hauteur fixe pour conserver un cercle parfait */
+    border-radius: 50%;    /* Rend l'image totalement ronde */
+    object-fit: cover;     /* Évite les déformations de l'image */
+    border: 4px solid rgba(255, 255, 255, 0.8); /* Bordure blanche semi-transparente */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Ombre portée douce */
+    margin-bottom: 30px;   /* Espace en dessous de la photo */
+}
+
+/* ==========================================
+   6. BOUTONS D'ACTION ET SECONDAIRES
+   ========================================== */
+.boutons-groupe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;             /* Espace entre les boutons côte à côte */
+    margin-top: 25px;
+    flex-wrap: wrap;       /* Permet de passer à la ligne sur les petits écrans */
+}
+
+.btn-action {
+    background: linear-gradient(45deg, #ff4757, #ff6b81); /* Dégradé rouge-rose romantique */
+    color: white;          /* Texte en blanc */
+    border: none;          
+    padding: 15px 30px;    /* Espacement interne confortable */
+    font-size: 1.1rem;     
+    font-weight: 600;      
+    border-radius: 50px;   /* Bouton entièrement arrondi sur les côtés */
+    cursor: pointer;       /* Curseur en forme de main au survol */
+    box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4); /* Ombre lumineuse colorée */
+    transition: transform 0.2s, box-shadow 0.2s; /* Transition fluide au survol */
+    display: inline-block;
+}
+
+.btn-action:hover {
+    transform: translateY(-2px);                    /* Légère élévation au survol */
+    box-shadow: 0 10px 25px rgba(255, 71, 87, 0.6); /* Intensification de l'ombre */
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.85); /* Fond blanc translucide */
+    color: #333;                            /* Texte sombre contrasté */
+    border: none;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 1); /* Devient complètement blanc au survol */
+}
+
+/* ==========================================
+   7. TYPOGRAPHIE (TITRES ET TEXTES)
+   ========================================== */
+.titre-message {
+    font-size: 2rem;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8); /* Ombre portée pour détacher le texte du fond */
+    margin-bottom: 20px;
+}
+
+.texte-soutien {
+    font-size: 1.1rem;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    line-height: 1.6; /* Interligne aéré pour la lecture */
+    margin-bottom: 20px;
+}
+
+/* ==========================================
+   8. GALERIE DE MINI-CARTES (POUR LES 8 VIDÉOS)
+   ========================================== */
+.videos-grille {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Grille de 4 colonnes pour loger élégamment les 8 vidéos */
+    gap: 12px;                             /* Espace réduit entre les cartes */
+    margin-bottom: 25px;
+    width: 100%;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-carte-declencheur {
+    background: rgba(0, 0, 0, 0.5); /* Fond sombre semi-transparent (Glassmorphism) */
+    backdrop-filter: blur(10px);    /* Effet de flou en arrière-plan */
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.35); /* Bordure subtile lumineuse */
+    border-radius: 14px;
+    padding: 15px 8px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    
+    /* Paramètres initiaux pour l'animation d'arrivée en diagonale */
+    opacity: 0;
+    animation: arriveeDiagonale 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.video-carte-declencheur:hover {
+    transform: translateY(-6px) scale(1.04); /* Effet de zoom et de soulèvement au survol */
+    background: rgba(0, 0, 0, 0.7);
+    border-color: #ff4757;                   /* La bordure devient rouge-rose */
+    box-shadow: 0 12px 30px rgba(255, 71, 87, 0.5);
+}
+
+.miniature-apercu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.miniature-apercu .icone-play {
+    font-size: 1.3rem;
+    color: #ff4757;
+    text-shadow: 0 0 10px rgba(255, 71, 87, 0.8);
+}
+
+.miniature-apercu span:not(.icone-play) {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+/* Définition de l'animation d'arrivée en diagonale (glissement depuis le bas-gauche) */
+@keyframes arriveeDiagonale {
+    from {
+        opacity: 0;
+        transform: translate(-25px, 25px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+/* ==========================================
+   9. FENÊTRES POP-UPS (MODALES)
+   ========================================== */
+.modal-overlay {
+    display: none;                  /* Masqué par défaut */
+    position: fixed;                /* Fixé par-dessus toute la page */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fond sombre recouvrant l'écran */
+    backdrop-filter: blur(12px);    /* Flou d'arrière-plan prononcé */
+    -webkit-backdrop-filter: blur(12px);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;                  /* S'assure que le pop-up est au premier plan absolu */
+    animation: fadeInModal 0.3s ease-out;
+}
+
+.modal-conteneur {
+    background: rgba(20, 20, 20, 0.95); /* Boîte de dialogue sombre et élégante */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 30px 20px 20px 20px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+.modal-fermer {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-fermer:hover {
+    color: #ff4757; /* La croix devient rouge au survol */
+}
+
+/* Style de la vidéo à l'intérieur du pop-up */
+.content-video-modal {
+    width: 100%;
+    max-height: 240px;
+    border-radius: 10px;
+    object-fit: contain; /* Empêche la vidéo d'être coupée ou déformée */
+    margin-bottom: 15px;
+    outline: none;
+    background: #000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.modal-message {
+    color: #ffffff;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    min-height: 45px; /* Réserve de l'espace pour éviter les sauts de texte pendant l'écriture */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ==========================================
+   10. BOUTON DE CONTRÔLE AUDIO FLOTTANT
+   ========================================== */
+.btn-audio-controle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: none; /* Masqué tant que la musique n'a pas démarré */
+}
+
+.btn-audio-controle:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================
+   11. RESPONSIVE DESIGN (MOBILES ET PETITS ÉCRANS)
+   ========================================== */
+@media (max-width: 600px) {
+    .main-container { 
+        padding: 20px 10px; 
+    }
+    .profile-pic { 
+        width: 150px; 
+        height: 150px; 
+        margin-bottom: 20px; 
+    }
+    .btn-action, .btn-secondary { 
+        font-size: 1rem; 
+        padding: 12px 24px; 
+    }
+    .videos-grille {
+        grid-template-columns: repeat(2, 1fr); /* Passe la grille à 2 colonnes sur les petits écrans mobiles */
+        gap: 10px;
+    }
+}
