@@ -121,17 +121,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+    gap: 15px; /* Espacement ajusté pour éviter le débordement sur mobile */
     margin: 15px 0;
+    width: 100%;
 }
 
 .carrousel-fleche {
     background: rgba(0, 0, 0, 0.6);
     border: 2px solid rgba(255, 255, 255, 0.6);
     color: #ffffff;
-    font-size: 1.4rem;
-    width: 45px;
-    height: 45px;
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -139,6 +140,7 @@ body {
     justify-content: center;
     transition: all 0.2s ease;
     z-index: 10;
+    flex-shrink: 0; /* Empêche les flèches de s'écraser sur les petits écrans */
 }
 
 .carrousel-fleche:hover {
@@ -150,21 +152,22 @@ body {
     background: transparent;
     border: none;
     padding: 0;
-    width: 220px;
-    height: 310px;
+    width: 200px;
+    height: 290px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     position: relative;
+    flex-shrink: 0;
 }
 
 .content-video-principal {
     width: 100%;
     height: 100%;
     border-radius: 14px;
-    object-fit: cover;
-    background: #000;
+    object-fit: cover; /* Assure le remplissage sans bandes noires */
+    background: transparent;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
 }
 
@@ -172,6 +175,7 @@ body {
     max-width: 450px;
     margin: 15px auto 0 auto;
     min-height: 50px;
+    padding: 0 10px;
 }
 
 .texte-machine-lateral {
@@ -223,7 +227,7 @@ body {
 .anim-tout-en-haut     { animation: departToutEnHaut 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
 /* ================================================= */
-/* SECTION MODALE / POP-UP VIDÉO (Intégrée et sans cadre rigide) */
+/* SECTION MODALE / POP-UP VIDÉO (Intégrée sans cadre) */
 /* ================================================= */
 .modal-overlay {
     display: none;
@@ -240,17 +244,17 @@ body {
 }
 
 .modal-conteneur {
-    background: transparent; /* Suppression du fond gris/noir encadré */
-    border: none; /* Suppression de la bordure blanche encadrée */
+    background: transparent;
+    border: none;
     padding: 0;
     width: 90%;
-    max-width: 650px; /* Élargissement pour disposer la vidéo et le texte côte à côte */
+    max-width: 650px;
     text-align: left;
     position: relative;
     box-shadow: none;
     display: flex;
     align-items: center;
-    gap: 30px; /* Espace harmonieux entre la vidéo et le texte */
+    gap: 30px;
 }
 
 .modal-fermer {
@@ -281,12 +285,11 @@ body {
     height: 310px;
     border-radius: 14px;
     object-fit: cover;
-    background: #000;
+    background: transparent;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
     flex-shrink: 0;
 }
 
-/* Zone dédiée au texte à côté de la vidéo */
 .modal-texte-zone {
     flex-grow: 1;
     display: flex;
