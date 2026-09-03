@@ -1,84 +1,160 @@
-/* ==========================================================
-   GESTION DE LA NAVIGATION, DE LA MUSIQUE ET DES POP-UPS
-   ========================================== */
+/* ================================================= */
+/* TABLEAU DES DONNÉES : FICHIERS, TEXTES GRILLE ET POP-UP */
+/* ================================================= */
+const donneesVideos = [
+    { 
+        src: "1.mp4", 
+        texteGrille: "Le début de nos plus beaux rires.", 
+        textePopup: "Un premier petit souvenir rien qu'à nous qui j'espère te fera sourire. Tu es magnifique. ❤️" 
+    },
+    { 
+        src: "2.mp4", 
+        texteGrille: "Une pensée rien que pour toi.", 
+        textePopup: "Pense à quel point tu comptes pour moi. Ne l'oublie jamais, mon cœur. ✨" 
+    },
+    { 
+        src: "3.mp4", 
+        texteGrille: "Quand tu as besoin de force.", 
+        textePopup: "Je serai toujours là pour te redonner de la force quand tu en auras besoin. 💍" 
+    },
+    { 
+        src: "4.mp4", 
+        texteGrille: "Nos éclats de soleil.", 
+        textePopup: "Chaque instant partagé avec toi illumine mes journées. Tu es extraordinaire. 🌟" 
+    },
+    { 
+        src: "5.mp4", 
+        texteGrille: "Un instant hors du temps.", 
+        textePopup: "Accroche-toi, mon amour, tu n'es jamais seule face aux difficultés. 💪" 
+    },
+    { 
+        src: "6.mp4", 
+        texteGrille: "Ton si beau sourire.", 
+        textePopup: "Ton sourire est la plus belle chose au monde. Garde confiance en toi. 🥰" 
+    },
+    { 
+        src: "7.mp4", 
+        texteGrille: "Une vague de tendresse.", 
+        textePopup: "Ensemble, on peut surmonter n'importe quelle tempête. Je t'inonde de bisous. 😘" 
+    },
+    { 
+        src: "8.mp4", 
+        texteGrille: "Pour l'éternité.", 
+        textePopup: "Une douce attention de plus pour te rappeler à quel point je t'aime infiniment. ❤️" 
+    }
+];
 
-/* Fonction principale pour changer de page de manière fluide */
+let indexVideoActuelle = 0;
+
+/* Tableau contenant toutes les différentes animations de coins */
+const listeAnimationsCoins = [
+    "anim-coin-haut-droit",
+    "anim-coin-haut-gauche",
+    "anim-coin-bas-droit",
+    "anim-coin-bas-gauche",
+    "anim-tout-en-haut"
+];
+
+/* ================================================= */
+/* FONCTION DE NAVIGATION ENTRE LES PAGES            */
+/* ================================================= */
 function allerVers(idPageCible) {
-    // Sélectionne toutes les sections de pages
-    const toutesLesPages = document.querySelectorAll(".page");
+    document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
     
-    // Retire la classe 'active' de chaque page pour les masquer
-    toutesLesPages.forEach(function(page) {
-        page.classList.remove("active");
-    });
-
-    // Recherche la page spécifique que l'on souhaite afficher
     const pageVoulue = document.getElementById(idPageCible);
-    
     if (pageVoulue) {
-        // Active la page cible
         pageVoulue.classList.add("active");
-        // Remonte tout en haut de la page instantanément
         window.scrollTo(0, 0);
 
-        // Déclenche des actions spécifiques selon la page atteinte
         if (idPageCible === "page-transition") {
-            // Lance l'effet machine à écrire sur le premier texte de soutien
-            lancerMachineAEcrire("texte-machine-1", "J'ai remarqué que ton cœur était un peu lourd ces derniers temps, et je voulais te rappeler que tu n'es pas seule. Prends une grande inspiration, je suis là pour toi.", 35);
+            lancerMachineAEcrire("texte-machine-1", "J'ai remarqué que ton cœur était un peu lourd ces derniers temps, et je voulais te rappeler que tu n'es pas seule. Prends une grande inspiration, je suis là pour toi.", 30);
+        } else if (idPageCible === "page-galerie") {
+            mettreAJourCarrousel();
         } else if (idPageCible === "page-message-final") {
-            // Texte complet du message final affiché progressivement
             const messageFinal = "La femme de ma vie ❤️💍\n\n" +
                 "Je veux que tu saches une chose, du fond du cœur : tu n’es pas seule. Je suis là, avec toi, dans chaque larme, dans chaque peur, dans chaque battement de ton cœur.\n\n" +
                 "Tu es une femme forte, même si aujourd’hui tu ne la sens pas, cette force. Tu as déjà surmonté tellement d’épreuves dans ta vie, et celle-ci, aussi dure soit-elle, ne définira pas qui tu es.\n\n" +
                 "Je crois en toi, mon cœur. Respire, mon amour. Ça va aller, et moi, je ne te lâche pas.\n\n" +
                 "Je t’aime plus que tout.";
-            lancerMachineAEcrire("texte-machine-2", messageFinal, 20);
+            lancerMachineAEcrire("texte-machine-2", messageFinal, 15);
         }
-    } else {
-        console.error("Impossible de trouver la page avec l'ID : " + idPageCible);
     }
 }
 
-/* Fonction réutilisable pour simuler l'effet d'une machine à écrire lettre par lettre */
+/* ================================================= */
+/* MISE À JOUR DE LA VIDÉO AVEC ROTATION DES MOUVEMENTS*/
+/* ================================================= */
+function mettreAJourCarrousel() {
+    const videoElement = document.getElementById("videoCarrouselActive");
+    const sourceElement = videoElement.querySelector("source");
+    const wrapperElement = document.getElementById("declencheurPopup");
+    const infoCourante = donneesVideos[indexVideoActuelle];
+    
+    sourceElement.src = infoCourante.src;
+    videoElement.load();
+    videoElement.pause();
+
+    const elementTexteLateral = document.getElementById("texte-carrousel-actif");
+    if (elementTexteLateral) {
+        elementTexteLateral.textContent = infoCourante.texteGrille;
+    }
+
+    /* On choisit une animation différente à chaque changement pour que chaque mouvement soit unique et visible */
+    const animationChoisie = listeAnimationsCoins[indexVideoActuelle % listeAnimationsCoins.length];
+
+    /* Nettoyage de toutes les anciennes classes d'animation */
+    wrapperElement.classList.remove(
+        "anim-coin-haut-droit", 
+        "anim-coin-haut-gauche", 
+        "anim-coin-bas-droit", 
+        "anim-coin-bas-gauche", 
+        "anim-tout-en-haut"
+    );
+    
+    /* Réinitialisation forcée du DOM pour déclencher l'effet visuel */
+    void wrapperElement.offsetWidth; 
+    
+    /* Application de la nouvelle animation de coin */
+    wrapperElement.classList.add(animationChoisie);
+}
+
+/* ================================================= */
+/* EFFET MACHINE À ÉCRIRE                            */
+/* ================================================= */
 function lancerMachineAEcrire(elementId, texteComplet, vitesse) {
     const elementTexte = document.getElementById(elementId);
     if (!elementTexte) return;
 
-    elementTexte.textContent = ""; // Réinitialise le texte de l'élément
+    elementTexte.textContent = "";
     let index = 0;
 
     function ecrire() {
         if (index < texteComplet.length) {
-            // Ajoute le caractère suivant au contenu textuel
             elementTexte.textContent += texteComplet.charAt(index);
             index++;
-            // Rappelle la fonction après un court délai (vitesse)
             setTimeout(ecrire, vitesse);
         }
     }
-
     ecrire();
 }
 
-/* Gestionnaire d'événements global pour intercepter tous les clics de l'application */
+/* ================================================= */
+/* GESTIONNAIRE DES CLICS                            */
+/* ================================================= */
 document.addEventListener("click", function(event) {
     const target = event.target;
     const id = target.id;
     const audio = document.getElementById("musique-fond");
     const btnAudio = document.getElementById("btnAudioControle");
 
-    // 1. Bouton d'accueil : Démarrage de la musique et transition vers la page suivante
     if (id === "btnVersPage2") {
         if (audio) {
             audio.play().then(() => {
-                if (btnAudio) btnAudio.style.display = "block"; // Affiche le bouton de contrôle audio
-            }).catch(error => {
-                console.log("Erreur de lecture audio : ", error);
-            });
+                if (btnAudio) btnAudio.style.display = "block";
+            }).catch(error => { console.log(error); });
         }
         allerVers("page-transition");
     } 
-    // 2. Bouton de contrôle du son (Activer / Couper)
     else if (id === "btnAudioControle") {
         if (audio.muted) {
             audio.muted = false; 
@@ -88,62 +164,51 @@ document.addEventListener("click", function(event) {
             btnAudio.textContent = "🔇 Activer le son";
         }
     }
-    // 3. Boutons de navigation entre les différentes pages
-    else if (id === "btnVersPage3") {
-        allerVers("page-galerie");
+    else if (id === "btnVersPage3") { allerVers("page-galerie"); } 
+    else if (id === "btnRetour1") { allerVers("page-accueil"); } 
+    else if (id === "btnVersPage4") { allerVers("page-message-final"); } 
+    else if (id === "btnRetour2") { allerVers("page-transition"); } 
+    else if (id === "btnRetourAccueil") { allerVers("page-accueil"); }
+    else if (id === "btnCarrouselPrecedent") {
+        indexVideoActuelle = (indexVideoActuelle - 1 + donneesVideos.length) % donneesVideos.length;
+        mettreAJourCarrousel();
     } 
-    else if (id === "btnRetour1") {
-        allerVers("page-accueil");
-    } 
-    else if (id === "btnVersPage4") {
-        allerVers("page-message-final");
-    } 
-    else if (id === "btnRetour2") {
-        allerVers("page-transition");
-    } 
-    else if (id === "btnRetourAccueil") {
-        allerVers("page-accueil");
+    else if (id === "btnCarrouselSuivant") {
+        indexVideoActuelle = (indexVideoActuelle + 1 + donneesVideos.length) % donneesVideos.length;
+        mettreAJourCarrousel();
     }
-
-    // 4. Ouverture des pop-ups des 8 vidéos et déclenchement dynamique du texte associé
-    const carteDeclencheur = target.closest(".video-carte-declencheur");
-    if (carteDeclencheur) {
-        const popupId = carteDeclencheur.getAttribute("data-video");
-        const popup = document.getElementById(popupId);
-        if (popup) {
-            popup.style.display = "flex"; // Affiche le pop-up en modale
-
-            // Lancement de la machine à écrire adaptée pour chaque vidéo de 1 à 8
-            if (popupId === "popup-1") {
-                lancerMachineAEcrire("texte-modal-1", "Un premier petit souvenir rien qu'à nous qui j'espère te fera sourire. Tu es magnifique. ❤️", 30);
-            } else if (popupId === "popup-2") {
-                lancerMachineAEcrire("texte-modal-2", "Pense à quel point tu comptes pour moi. Ne l'oublie jamais, mon cœur. ✨", 30);
-            } else if (popupId === "popup-3") {
-                lancerMachineAEcrire("texte-modal-3", "Je serai toujours là pour te redonner de la force quand tu en auras besoin. 💍", 30);
-            } else if (popupId === "popup-4") {
-                lancerMachineAEcrire("texte-modal-4", "Chaque instant partagé avec toi illumine mes journées. Tu es extraordinaire. 🌟", 30);
-            } else if (popupId === "popup-5") {
-                lancerMachineAEcrire("texte-modal-5", "Accroche-toi, mon amour, tu n'es jamais seule face aux difficultés. 💪", 30);
-            } else if (popupId === "popup-6") {
-                lancerMachineAEcrire("texte-modal-6", "Ton sourire est la plus belle chose au monde. Garde confiances en toi. 🥰", 30);
-            } else if (popupId === "popup-7") {
-                lancerMachineAEcrire("texte-modal-7", "Ensemble, on peut surmonter n'importe quelle tempête. Je t'inonde de bisous. 😘", 30);
-            } else if (popupId === "popup-8") {
-                lancerMachineAEcrire("texte-modal-8", "Une douce attention de plus pour te rappeler à quel point je t'aime infiniment. ❤️", 30);
-            }
+    else if (target.closest("#declencheurPopup")) {
+        const popupModal = document.getElementById("popup-video-global");
+        const videoModal = document.getElementById("videoPopupModal");
+        const sourceModal = document.getElementById("sourceVideoModal");
+        
+        if (audio && !audio.muted) {
+            audio.muted = true;
+            window.musiqueEtaitActive = true;
         }
-    }
 
-    // 5. Fermeture des pop-ups (via la croix ou en cliquant sur l'arrière-plan sombre)
-    if (target.classList.contains("modal-fermer") || target.classList.contains("modal-overlay")) {
-        const modal = target.closest(".modal-overlay");
-        if (modal) {
-            modal.style.display = "none"; // Masque le pop-up
-            // Met en pause la vidéo et réinitialise sa lecture à zéro
-            const video = modal.querySelector("video");
-            if (video) {
-                video.pause();
-                video.currentTime = 0;
+        const infoCourante = donneesVideos[indexVideoActuelle];
+        sourceModal.src = infoCourante.src;
+        videoModal.load();
+        videoModal.play();
+
+        lancerMachineAEcrire("texte-modal-actif", infoCourante.textePopup, 20);
+        popupModal.style.display = "flex";
+    }
+    else if (target.id === "fermerPopupModal" || target.id === "popup-video-global") {
+        const popupModal = document.getElementById("popup-video-global");
+        const videoModal = document.getElementById("videoPopupModal");
+        
+        if (popupModal) {
+            popupModal.style.display = "none";
+            if (videoModal) {
+                videoModal.pause();
+                videoModal.currentTime = 0;
+            }
+            if (window.musiqueEtaitActive && audio) {
+                audio.muted = false;
+                window.musiqueEtaitActive = false;
+                if (btnAudio) btnAudio.textContent = "🔊 Couper le son";
             }
         }
     }
