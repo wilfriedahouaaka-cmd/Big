@@ -118,15 +118,19 @@ body {
 /* SECTION GALERIE ET CARROUSEL                      */
 /* ================================================= */
 .galerie-layout-horizontal {
+    position: relative; /* Référence pour le positionnement absolu des flèches */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px; /* Espacement ajusté pour éviter le débordement sur mobile */
-    margin: 15px 0;
+    margin: 15px auto;
     width: 100%;
+    max-width: 250px; /* Contient l'ensemble pour un rendu mobile propre */
 }
 
 .carrousel-fleche {
+    position: absolute; /* Sort les flèches du flux pour les coller proprement sur les côtés de la vidéo */
+    top: 50%;
+    transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.6);
     border: 2px solid rgba(255, 255, 255, 0.6);
     color: #ffffff;
@@ -140,7 +144,16 @@ body {
     justify-content: center;
     transition: all 0.2s ease;
     z-index: 10;
-    flex-shrink: 0; /* Empêche les flèches de s'écraser sur les petits écrans */
+}
+
+/* Position de la flèche gauche à l'extérieur de la vidéo */
+.carrousel-fleche:first-child {
+    left: -20px;
+}
+
+/* Position de la flèche droite à l'extérieur de la vidéo */
+.carrousel-fleche:last-child {
+    right: -20px;
 }
 
 .carrousel-fleche:hover {
@@ -160,6 +173,7 @@ body {
     cursor: pointer;
     position: relative;
     flex-shrink: 0;
+    margin: 0 auto;
 }
 
 .content-video-principal {
